@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Cambria;}{\f1\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\ul\b\f0\fs32\lang9 Setup and Deployment\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone\fs22 Project is deployed to a custom Netlify URL\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees a custom icon in the tab window. All favicon information has been created an added correctly via {{\field{\*\fldinst{HYPERLINK https://realfavicongenerator.net/ }}{\fldrslt{https://realfavicongenerator.net/\ul0\cf0}}}}\f0\fs22  (you are welcome to use any free PNG image you find on {{\field{\*\fldinst{HYPERLINK https://www.flaticon.com/ }}{\fldrslt{https://www.flaticon.com/\ul0\cf0}}}}\f0\fs22 )\tab\tab\tab\par
+{\pntext\f1\'B7\tab}Metatag information has been created and added via {{\field{\*\fldinst{HYPERLINK https://metatags.io/ }}{\fldrslt{https://metatags.io/\ul0\cf0}}}}\f0\fs22  (You are welcome to use any free image you find on {{\field{\*\fldinst{HYPERLINK https://unsplash.com/ }}{\fldrslt{https://unsplash.com/\ul0\cf0}}}}\f0\fs22 ). Be mindful to manually replace all URL values (especially image URL) to absolute Netlify URL values (you will need to deploy to Netlify first)\tab\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\par
+\ul\fs32 UI/UX\ulnone\fs22 :\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 User sees the name of all available shows on the platform\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees shows sorted alphabetically when the app loads (default sorting)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User has a way to listen to any episode in a season for a show (note there is a single placeholder audio track for all shows)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to see a view where only episodes for a specific selected season are shown (Note that this can be a page view, a modal, or toggle dropdown - up to developer's design choice)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to toggle between different seasons for the same show\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees preview image of shows when browsing\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees the amount of seasons as a number in a show when browsing\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees a human-readable date to when a show was last updated\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees what genres (as genre titles) a show is associated with when browsing\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees a preview image of seasons for a specific show (Note some Shows have different images for each Season)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees the amount of episodes as a number for a season\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to go back to a show view from a season-specific view\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\ul\fs32 Data Fetching and State Management\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone\fs22 All show data loaded via a fetch call from the API (Note no podcast data should be hardcoded in the application)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}When viewing a specific show, data is loaded via fetch from individual show endpoint\par
+{\pntext\f1\'B7\tab}There is a loading state while initial data is being loaded\tab\tab\tab\par
+{\pntext\f1\'B7\tab}There is a loading state while new data is being loaded\tab\par
+
+\pard\sa200\sl276\slmult1\par
+\ul\fs32 User Interaction:\ulnone\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\fs22 User is able to mark specific episodes as favourites so that they can find them again (Note the requirement is that a specific episode of a specific season of a specific show is to be favourited)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User can visit a view where they see all their favourite episode\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to see the associated show and season when an episode is in favourites\tab\tab\tab\par
+{\pntext\f1\'B7\tab}Related by season/show episodes are grouped together in favourites\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to remove episodes from their favourites\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User sees the date and time that they added something as a favourite\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange favourites based on title from A-Z\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange favourites based on title from Z-A\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange favourites starting with the most recently updated\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange favourites starting with the furthest back updated\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange lists of shows based on title from A-Z\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange lists of shows based on title from Z-A\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange list showing the most recently updated (Newly updated Shows)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to arrange list of shows from least recently updated (Oldest updated Shows)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}Audio player is always visible so that user can listen to episodes while browsing                   \tab\tab\tab\par
+{\pntext\f1\'B7\tab}Audio player must show listening progress\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User receives a notification that confirms they want to close the page when audio is playing\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User can filter shows by genre\par
+
+\pard\sa200\sl276\slmult1\par
+\ul\fs32 Persistence and Storage\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone\fs22 App remembers and shows what episodes user listened to all the way through. \tab\tab\tab\par
+{\pntext\f1\'B7\tab}Favourites must be persisted in localStorage\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User has the option to "reset" all their progress, effectively removing their entire listening history. (Note marks are awarded only for "resetting" entire listening history)\tab\par
+
+\pard\sa200\sl276\slmult1\par
+\par
+\ul\fs32 Overall Assessment\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1\ulnone\fs22 The project has a good appearance and Desktop layout when opened in a web browser.\tab\tab\tab\par
+{\pntext\f1\'B7\tab}The project is easy to navigate and interact with through a web browser. \tab\tab\tab\par
+{\pntext\f1\'B7\tab}The project's commit history shows short and clear commit messages.\tab\tab\tab\par
+{\pntext\f1\'B7\tab}The project displays well on different devices and all screen sizes, ensuring usability on tablets\tab\tab\tab\par
+{\pntext\f1\'B7\tab}The README file includes a comprehensive introduction to the project, setup instructions, usage examples, and contact information.\tab\tab\tab\par
+{\pntext\f1\'B7\tab}The project loads and functions without ANY bugs  (Completed user stories possess no bugs whatsoever)\tab\tab\tab\par
+{\pntext\f1\'B7\tab}Well organized project structure & clean readable code\tab\par
+
+\pard\sa200\sl276\slmult1\par
+\ul\fs32 Additional Features.\par
+\ulnone\fs22 ( This will be counted as extra credit should you choose to attempt them. The project has extra features that make for a good user-experience) \tab\tab\tab\par
+
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1 User is presented with a sliding carousel of possible shows they might be interested in on the landing page\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to filter shows based on title by means of a text input\tab\tab\tab\par
+{\pntext\f1\'B7\tab}User is able to find shows based on fuzzy matching of concepts\tab\tab\tab\par
+{\pntext\f1\'B7\tab}App displays the exact timestamp location of where they left off any episode\tab\tab\tab\par
+}
+ 

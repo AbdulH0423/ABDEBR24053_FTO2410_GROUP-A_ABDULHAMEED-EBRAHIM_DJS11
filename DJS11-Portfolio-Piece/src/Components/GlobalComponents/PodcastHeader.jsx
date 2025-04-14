@@ -7,7 +7,7 @@ function PodcastHeader() {
     return (
         <header className="flex flex-wrap items-center justify-between bg-gray-900 text-white p-4 shadow-lg gap-4 md:gap-0">
         {/* Home Button */}
-        <Button variant="ghost" className="text-lg font-bold">PODLY</Button>
+        <Button variant="ghost"><img src="public/microphone.svg" className="w-auto h-14"/></Button>
   
         {/* Search Bar */}
         <Input 

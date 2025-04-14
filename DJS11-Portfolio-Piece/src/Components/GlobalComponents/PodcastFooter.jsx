@@ -11,7 +11,7 @@ function PodcastFooter() {
   const [volume, setVolume] = useState(0.5);
 
   return (
-    <footer className="bg-gray-800 text-white p-4 shadow-inner">
+    <footer className="fixed bottom-0 left-0 right-0 z-50 bg-gray-800 text-white p-4 shadow-inner">
       <div className="flex justify-between items-center flex-wrap gap-4">
         
         {/* Left: Now Playing */}

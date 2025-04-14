@@ -5,9 +5,9 @@ import { Input } from "../UI/Input";
 
 function PodcastHeader() {
     return (
-        <header className="flex flex-wrap items-center justify-between bg-gray-900 text-white p-4 shadow-lg gap-4 md:gap-0">
+        <header className="fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between bg-gray-900 text-white p-4 shadow-lg gap-4 md:gap-0">
         {/* Home Button */}
-        <Button variant="ghost"><img src="public/microphone.svg" className="w-auto h-14"/></Button>
+        <Button variant="ghost"><img src="public/microphone.svg" className="w-auto h-10"/></Button>
   
         {/* Search Bar */}
         <Input 

@@ -1,11 +1,18 @@
 import { useState , useEffect} from "react";
-/* import { FaBookOpen, FaSearch, FaPlus } from "react-icons/fa";
- */
+import { FaHeart} from "react-icons/fa";
+import { Button } from "../UI/Button";
+import PodcastModal from "../Modals/PodcastModal";
 
-function Library(){
+
+function Library({onLike, onEpisodeSelect}) {
     const [podcasts, setPodcasts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+
+    const [selectedPodcast, setSelectedPodcast] = useState(null);
+    const [isModalOpen, setIsmodalOpen] = useState(false);
+
 
     useEffect(() => {
         const fetchPodcasts = async () => {
@@ -19,6 +26,7 @@ function Library(){
                 }
                 const data = await response.json();
                 setPodcasts(data);
+                
 
                 if (data.length > 0) {
                     setLoading(false);
@@ -34,6 +42,17 @@ function Library(){
         fetchPodcasts();
         
     }, []);
+
+    const openModal = (podcast) => {
+        setSelectedPodcast(podcast);
+        setIsmodalOpen(true);
+
+    };
+
+    const closeModal =()=> {
+        setIsmodalOpen(false);
+        setSelectedPodcast(null);
+    }
 
     
 
@@ -64,20 +83,47 @@ function Library(){
     }
 
     return (
-        <div className="grid grid-cols-1 gap-4 p-4">
-        {podcasts.map((podcast) => (
-            <div key={podcast.id} className="bg-white rounded-lg shadow p-4 cursor-pointer hover:bg-gray-300 transition duration-200" 
-            >
-
-                <img src={podcast.image} alt={podcast.title} className ="w-auto h-32 rounded-lg mb-4" />
+        <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+            {podcasts.map((podcast) => (
+                <div key={podcast.id} className="bg-white rounded-lg shadow p-4 cursor-pointer flex gap-4 hover:bg-gray-300 transition duration-200" 
+                onClick={() => openModal(podcast)}>
+                    <img src={podcast.image} alt={podcast.title} className ="w-auto h-20 rounded-lg mb-4" />
+                    
+                    <div className= "flex-grow">
+                        <h2 className="text-lg font-semibold mb-2">{podcast.title}</h2>
+                        <p className="text-sm text-gray-700">{podcast.seasons} Seasons</p>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                                e.stopPropagation(); // ← prevents click from opening modal
+                                onLike(podcast);
+                                            }}
+                        >
+                            <FaHeart size={20} className="text-red-400" />
+                        </Button>
+                    </div>
+                    
                 
-                <h2 className="text-lg font-semibold mb-2">{podcast.title}</h2>
-                <p className="text-sm text-gray-700">{podcast.seasons} Seasons</p>
-      </div>
-      ))}
-        </div>
+                </div>
+        ))}
+            </div>
 
-    )
+        
+            <PodcastModal 
+            podcast={selectedPodcast} 
+            isOpen={isModalOpen} 
+            onClose={closeModal}
+            onPlay={(episode) => {
+                onEpisodeSelect(episode);
+                setIsmodalOpen(false); //close modal when an episode is selected
+              }}
+             />
+
+            
+        </>
+    );
 
 
 }

@@ -1,15 +1,34 @@
 import { useState , useEffect} from "react";
-import { FaHeart} from "react-icons/fa";
+import { FaHeart, FaSortAlphaDown, FaSortAlphaUpAlt, FaClock } from "react-icons/fa";
 import { Button } from "../UI/Button";
 import PodcastModal from "../Modals/PodcastModal";
 
 
-function Library({onLike, onEpisodeSelect}) {
+function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
     const [podcasts, setPodcasts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [sortOption, setSortOption] = useState(() => localStorage.getItem("sortOption") || "A-Z");
 
+    useEffect(() => {
+        localStorage.setItem("sortOption", sortOption);
+      }, [sortOption]);
 
+    let sortedPodcasts = [...podcasts];
+    if (sortOption === "A-Z" || sortOption === ""){
+        sortedPodcasts.sort(( a ,b )=> a.title.localeCompare(b.title));
+    } else if (sortOption === "Z-A") {
+        sortedPodcasts.sort(( a ,b ) => b.title.localeCompare(a.title));
+    } else if (sortOption === "Most Recent") {
+        sortedPodcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+    } else if (sortOption === "Oldest") {
+        sortedPodcasts.sort((a, b) => new Date(a.updated) - new Date(b.updated));
+    }
+
+    const filteredPodcasts = sortedPodcasts.filter((podcast) =>
+        podcast.title.toLowerCase().includes((searchTerm || "").toLowerCase())
+      );
+    
     const [selectedPodcast, setSelectedPodcast] = useState(null);
     const [isModalOpen, setIsmodalOpen] = useState(false);
 
@@ -62,11 +81,11 @@ function Library({onLike, onEpisodeSelect}) {
                 {Array.from({ length: 12 }).map((_, i) => (
             <div
           key={i}
-            className="animate-pulse bg-white shadow rounded-lg p-4 space-y-4"
+            className="animate-pulse bg-black shadow rounded-lg p-4 space-y-4"
         >
-          <div className="h-4 bg-gray-400 rounded w-full"></div>
-          <div className="h-3 bg-gray-300 rounded w-full"></div>
-          <div className="h-3 bg-gray-200 rounded w-full"></div>
+          <div className="h-4 bg-gray-900 rounded w-full"></div>
+          <div className="h-3 bg-gray-700 rounded w-full"></div>
+          <div className="h-3 bg-gray-500 rounded w-full"></div>
             </div>
       ))}
     </div>
@@ -83,16 +102,45 @@ function Library({onLike, onEpisodeSelect}) {
     }
 
     return (
-        <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
-            {podcasts.map((podcast) => (
-                <div key={podcast.id} className="bg-white rounded-lg shadow p-4 cursor-pointer flex gap-4 hover:bg-gray-300 transition duration-200" 
+        <> 
+
+            <div className="bg-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4 p-4">
+
+                      {/* Sort Dropdown */}
+                <div className="w-full sm:w-auto text-gray-900">
+                    <label className="block text-sm font-semibold mb-1 text-gray-900">Sort by:</label>
+                        <div className="relative">
+                        <select
+                            value={sortOption}
+                            onChange={(e) => setSortOption(e.target.value)}
+                            className="text-gray-100 appearance-none border rounded-md p-2 pr-8 text-sm w-full bg-gray-900 shadow focus:outline-none focus:ring"
+                        >
+                            <option value="A-Z">A - Z</option>
+                            <option value="Z-A">Z - A</option>
+                            <option value="Most Recent">Most Recent</option>
+                            <option value="Oldest">Oldest</option>
+                        </select>
+                        <div className="absolute right-2 top-2.5 text-gray-100 pointer-events-none">
+                            {sortOption === "A-Z" && <FaSortAlphaDown />}
+                            {sortOption === "Z-A" && <FaSortAlphaUpAlt />}
+                            {sortOption === "Most Recent" && <FaClock />}
+                            {sortOption === "Oldest" && <FaClock />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4  rounded-lg shadow-lg">
+            {filteredPodcasts.length === 0 ? (
+                    <p className="text-gray-100 p-4">No podcasts match your search.</p>
+                    ) : (
+                    filteredPodcasts.map((podcast) => (
+                <div key={podcast.id} className="bg-gray-800 rounded-lg shadow p-4 cursor-pointer flex gap-4 hover:bg-gray-900 transition duration-200" 
                 onClick={() => openModal(podcast)}>
                     <img src={podcast.image} alt={podcast.title} className ="w-auto h-20 rounded-lg mb-4" />
                     
                     <div className= "flex-grow">
-                        <h2 className="text-lg font-semibold mb-2">{podcast.title}</h2>
-                        <p className="text-sm text-gray-700">{podcast.seasons} Seasons</p>
+                        <h2 className="text-lg font-semibold mb-2 text-gray-300">{podcast.title}</h2>
+                        <p className="text-sm text-gray-500">{podcast.seasons} Seasons</p>
                         <Button
                             variant="ghost"
                             size="icon"
@@ -101,14 +149,15 @@ function Library({onLike, onEpisodeSelect}) {
                                 onLike(podcast);
                                             }}
                         >
-                            <FaHeart size={20} className="text-red-400" />
+                            <FaHeart size={20} className={liked.some((p) => p.id === podcast.id) ? "text-red-500" : "text-gray-200"} />
                         </Button>
                     </div>
                     
                 
                 </div>
-        ))}
-            </div>
+        ))
+        )}
+        </div>
 
         
             <PodcastModal 
@@ -118,7 +167,7 @@ function Library({onLike, onEpisodeSelect}) {
             onPlay={(episode) => {
                 onEpisodeSelect(episode);
                 setIsmodalOpen(false); //close modal when an episode is selected
-              }}
+                }}
              />
 
             

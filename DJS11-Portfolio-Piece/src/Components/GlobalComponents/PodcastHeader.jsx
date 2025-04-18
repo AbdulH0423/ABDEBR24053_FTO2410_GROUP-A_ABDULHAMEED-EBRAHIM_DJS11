@@ -42,10 +42,12 @@ function PodcastHeader({ onSearch }) {
           <NavLink
                   to="/liked"
                   className={({ isActive }) =>
-                    `hover:underline text-sm ${isActive ? "text-blue-400 font-semibold" : "text-white"}`
-                  }
-                >
-                  Liked
+                    `hover:underline text-sm ${isActive ? "text-blue-400 font-semibold" : "text-white"}` }>
+                  Favorites
+          </NavLink>
+          <NavLink to="/recommended" className={({ isActive }) =>
+              `hover:underline text-sm ${isActive ? "text-blue-400 font-semibold" : "text-white"}`}>
+              Recommended
           </NavLink>
           </nav>
       </div>

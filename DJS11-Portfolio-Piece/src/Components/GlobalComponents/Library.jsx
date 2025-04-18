@@ -4,7 +4,7 @@ import { Button } from "../UI/Button";
 import PodcastModal from "../Modals/PodcastModal";
 
 
-function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
+function Library({liked, onLike, onPlay , searchTerm ="" }) {
     const [podcasts, setPodcasts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -166,15 +166,15 @@ function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
         </div>
 
         
-            <PodcastModal 
-            podcast={selectedPodcast} 
-            isOpen={isModalOpen} 
-            onClose={closeModal}
-            onPlay={(episode) => {
-                onEpisodeSelect(episode);
-                setIsmodalOpen(false); //close modal when an episode is selected
-                }}
-             />
+        <PodcastModal
+        podcast={selectedPodcast}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onPlay={(episode) => {
+          onPlay(episode);
+          closeModal();
+        }}
+      />
 
             
         </>

@@ -49,6 +49,10 @@ function PodcastHeader({ onSearch }) {
               `hover:underline text-sm ${isActive ? "text-blue-400 font-semibold" : "text-white"}`}>
               Recommended
           </NavLink>
+          <NavLink to="/genres" className={({ isActive }) =>
+              `hover:underline text-sm ${isActive ? "text-blue-400 font-semibold" : "text-white"}`}>
+              Genres 
+          </NavLink>
           </nav>
       </div>
 

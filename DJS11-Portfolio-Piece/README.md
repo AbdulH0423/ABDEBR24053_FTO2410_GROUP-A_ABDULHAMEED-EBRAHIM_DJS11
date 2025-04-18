@@ -15,3 +15,5 @@ If you are developing a production application, we recommend using TypeScript an
 
 ## Project Outline
 LOOM functionallity preentation: <https://www.loom.com/share/041c58cd648c42acbd4d03edb3db7a12?sid=e9a5ed5d-a703-4b49-abc9-7b3d5935bede>
+
+Netlify domain<podable.netlify.app>

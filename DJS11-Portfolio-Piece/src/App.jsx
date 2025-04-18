@@ -3,6 +3,7 @@ import PodcastFooter from "./Components/GlobalComponents/PodcastFooter";
 import LikedPodcasts from "./Components/GlobalComponents/LikedPodcasts";
 import Library from "./Components/GlobalComponents/Library";
 import RecommendedPodcasts from "./Components/GlobalComponents/RecommendedPodcasts";
+import Genres from "./Components/GlobalComponents/Genres";
 import { Routes, Route } from "react-router-dom";
 import usePodcastStore from "./store/podcastStore";
 
@@ -62,6 +63,7 @@ function App() {
               />
             }
           />
+          <Route path="/genres" element={<Genres onPlay={playEpisode} />} />
         </Routes>
       </main>
 

@@ -9,10 +9,14 @@ function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sortOption, setSortOption] = useState(() => localStorage.getItem("sortOption") || "A-Z");
+    
 
     useEffect(() => {
         localStorage.setItem("sortOption", sortOption);
       }, [sortOption]);
+
+      const normalize = (str) =>
+        str.toLowerCase().replace(/[^a-z0-9]/gi, "");
 
     let sortedPodcasts = [...podcasts];
     if (sortOption === "A-Z" || sortOption === ""){
@@ -23,10 +27,10 @@ function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
         sortedPodcasts.sort((a, b) => new Date(b.updated) - new Date(a.updated));
     } else if (sortOption === "Oldest") {
         sortedPodcasts.sort((a, b) => new Date(a.updated) - new Date(b.updated));
-    }
-
+    } 
+    
     const filteredPodcasts = sortedPodcasts.filter((podcast) =>
-        podcast.title.toLowerCase().includes((searchTerm || "").toLowerCase())
+        normalize(podcast.title).includes(normalize(searchTerm))
       );
     
     const [selectedPodcast, setSelectedPodcast] = useState(null);
@@ -119,12 +123,14 @@ function Library({liked, onLike, onEpisodeSelect, searchTerm ="" }) {
                             <option value="Z-A">Z - A</option>
                             <option value="Most Recent">Most Recent</option>
                             <option value="Oldest">Oldest</option>
+                            
                         </select>
                         <div className="absolute right-2 top-2.5 text-gray-100 pointer-events-none">
                             {sortOption === "A-Z" && <FaSortAlphaDown />}
                             {sortOption === "Z-A" && <FaSortAlphaUpAlt />}
                             {sortOption === "Most Recent" && <FaClock />}
                             {sortOption === "Oldest" && <FaClock />}
+                            
                         </div>
                     </div>
                 </div>
